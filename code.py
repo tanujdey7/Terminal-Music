@@ -22,8 +22,8 @@ class MyLogger(object):
 
 def my_hook(d):
     if d['status'] == 'finished':
-        print "Done.."
-        print "-----------------------------------------------------------------"
+        print ("Done..")
+        print ("-----------------------------------------------------------------")
 
 
 def DownloadMP3(url):
@@ -37,7 +37,7 @@ def DownloadMP3(url):
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         info_dict = ydl.extract_info(url, download=False)
         video_title = info_dict.get('title', None)
-        print "Downloading.. : " + video_title
+        print ("Downloading.. : " + video_title)
         ydl.download([url])
 
 def SelectMusicFolder(folder_name):
@@ -46,13 +46,13 @@ def SelectMusicFolder(folder_name):
     music_dir = home_dir + "/Music/"+folder_name
     try:
         os.chdir(music_dir)
-        print "Downloading Music to: "+ music_dir
+        print ("Downloading Music to: "+ music_dir)
     except OSError:
         os.mkdir(music_dir)
         os.chdir(music_dir)
-        print "New Folder Created Downloading Music : "+ music_dir
+        print ("New Folder Created Downloading Music : "+ music_dir)
     except:
-        print "Something went wrong.."
+        print ("Something went wrong..")
 
 def LoadHistoryArray():
 
@@ -73,7 +73,7 @@ def LoadHistoryArray():
         try:
             domain = url.split('/')[2]
         except:
-            print "Url too short to find domain"
+            print ("Url too short to find domain")
         # create a dict item
         history_item = {}
         history_item['datetime'] = datetime
@@ -106,7 +106,7 @@ def FavouriteMusic():
             try:
                 DownloadMP3(youtube_song_url)
             except:
-                print "Can't download"
+                print ("Can't download")
 
 
 
@@ -162,11 +162,11 @@ def LatestMusicFromChannel(channel_url):
         if song_url == None:
             continue
         if SongFilter(song_title) and OnlyHindi(song_title):
-            print song_title
+            print (song_title)
             try:
                 DownloadMP3("https://www.youtube.com"+song_url)
             except:
-                print "Can't download"
+                print ("Can't download")
 
 def YoutubeTrendingMusic():
     SelectMusicFolder('TrendingMusic')    # Selecting the destination where the music file will be saved
@@ -187,23 +187,23 @@ def YoutubeTrendingMusic():
         title = playlist.eq(i).find('a').text()
         owner = video_owners.eq(i).find('a').text()
         if SongFilter(title) and OnlyHindi(title):
-            print title
+            print (title)
             try:
                 DownloadMP3(download_url)
             except:
-                print "Can't download"
+                print ("Can't download")
 
 
 def Help():
-    print "Youtube Audio Downloader"
-    print "-----------------------------------"
-    print "Trending on Youtube India : music trending"
-    print "Search Song: music search '<Song Title>'"
-    print "Favourite : music fav "
-    print "Recent From Tseries : music tseries"
-    print "Recent From Sony Music India : music sony"
-    print "Recent From any youtube channel  : music channel <channel_url>"
-    print "From URL : music url <url>"
+    print ("Youtube Audio Downloader")
+    print ("-----------------------------------")
+    print ("Trending on Youtube India : music trending")
+    print ("Search Song: music search '<Song Title>'")
+    print ("Favourite : music fav ")
+    print ("Recent From Tseries : music tseries")
+    print ("Recent From Sony Music India : music sony")
+    print ("Recent From any youtube channel  : music channel <channel_url>")
+    print ("From URL : music url <url>")
 
 
 if __name__ == '__main__':
